@@ -16,7 +16,7 @@ class Experiment:
         self.data_matrix = np.zeros((seeds, n))
 
         # when to start estimating parametes
-        first = 2*self.k + 2
+        first = 2*(self.k + 2)
 
         for s in range(seeds):
 

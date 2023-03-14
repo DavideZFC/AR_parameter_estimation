@@ -14,5 +14,5 @@ exp.make_experiment(seeds = 10, n = 100)
 fig, ax = plt.subplots(figsize=(12, 8))
 exp.plot_confidence_region(ax, col = 'C0', label='confidence regions')
 
-save_name = 'learning_curve'
+save_name = 'learning_curve_2'
 fig.savefig('figures/'+save_name+'.pdf')
