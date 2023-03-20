@@ -15,8 +15,8 @@ class Experiment:
         # generate matrix to contain dat
         self.data_matrix = np.zeros((seeds, n))
 
-        # when to start estimating parametes
-        first = 2*(self.k + 2)
+        # when to start estimating parametes (before data matrix is not invertible)
+        first = 2*(self.k + 1)
 
         for s in range(seeds):
 
@@ -34,8 +34,12 @@ class Experiment:
     
     def plot_confidence_region(self, ax, col, label):
         """Plots confidence curves for how much the estimated parametrs can approximate the real ones"""
+
+        # Gets confidence bounds
         low, high = bootstrap_ci(self.data_matrix)
         x = np.linspace(0, len(low), len(low))
+
+        # Plots the data
         plot_data(x, low, high, ax, col, label)
         return low, high
 

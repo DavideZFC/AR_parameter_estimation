@@ -22,4 +22,7 @@ class AutoregressiveProcess:
     
     def mse(self, v0, v):
         """Returns the MSE between the estimated values v0, v and the real coefficients."""
-        return np.sum((v-self.coefficients)**2) + (v0-self.gamma0)**2
+        mse = np.sum((v-self.coefficients)**2) + (v0-self.gamma0)**2
+
+        # return MSE clipped to ensure we always estimate a point in the feasible region
+        return min(mse, self.k+1)**0.5
