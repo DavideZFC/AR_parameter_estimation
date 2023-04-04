@@ -1,18 +1,22 @@
 import numpy as np
 
 class AutoregressiveProcess:
-    def __init__(self, coefficients, gamma0):
+    def __init__(self, coefficients, gamma0, noise_type='guassian'):
         self.k = len(coefficients)
         self.gamma0 = gamma0
         self.coefficients = coefficients
+        self.noise_type = noise_type
 
-    def simulate(self, n, sd=1):
+    def simulate(self, n, sd=1, u=1):
         """Simulate an autoregressive process of length n, with given standard deviation."""
         # Initialize the process with zeros
         x = np.zeros(n)
 
         # Generate random noise
-        noise = sd*np.random.normal(size=n)
+        if self.noise_type == 'gaussian':
+            noise = sd*np.random.normal(size=n)
+        else:
+            noise = np.random.uniform(-u,u,size=n)
 
         # Simulate the process
         for i in range(self.k, n):
